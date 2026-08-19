@@ -1,12 +1,9 @@
+import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight, Play } from "lucide-react";
-import { HlsVideo } from "@/components/HlsVideo";
 import { BlurText } from "@/components/BlurText";
 import { WHATSAPP_URL } from "@/lib/constants";
 import { LogoMarquee } from "@/components/LogoMarquee";
-
-const HERO_STREAM =
-  "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
 
 const fadeUp = {
   initial: { filter: "blur(10px)", opacity: 0, y: 20 },
@@ -14,17 +11,91 @@ const fadeUp = {
 };
 
 export function Hero() {
+  const [videoStarted, setVideoStarted] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [videoFinished, setVideoFinished] = useState(false);
+
+  const startTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const durationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleEnd = () => {
+    if (videoEnded) return; // avoid double trigger
+    if (durationTimeoutRef.current) clearTimeout(durationTimeoutRef.current);
+    if (startTimeoutRef.current) clearTimeout(startTimeoutRef.current);
+
+    setVideoEnded(true);
+    // Smooth transition: Wait for 1s fade-out to finish before unmounting video
+    fadeTimeoutRef.current = setTimeout(() => {
+      setVideoFinished(true);
+    }, 1000);
+  };
+
+  const handlePlay = () => {
+    setVideoStarted(true);
+    if (startTimeoutRef.current) {
+      clearTimeout(startTimeoutRef.current);
+    }
+  };
+
+  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const duration = e.currentTarget.duration;
+    if (duration && !isNaN(duration)) {
+      if (durationTimeoutRef.current) clearTimeout(durationTimeoutRef.current);
+      // Fallback timer: trigger handleEnd if ended doesn't fire (duration + 1.5 seconds)
+      durationTimeoutRef.current = setTimeout(() => {
+        handleEnd();
+      }, (duration + 1.5) * 1000);
+    }
+  };
+
+  const handleError = () => {
+    console.warn("Hero video failed to load. Falling back to text.");
+    setVideoEnded(true);
+    setVideoFinished(true);
+  };
+
+  useEffect(() => {
+    // If the video hasn't started playing within 3 seconds, assume autoplay is blocked or failed
+    startTimeoutRef.current = setTimeout(() => {
+      if (!videoStarted) {
+        console.warn("Autoplay block or loading timeout. Revealing content.");
+        setVideoEnded(true);
+        setVideoFinished(true);
+      }
+    }, 3000);
+
+    return () => {
+      if (startTimeoutRef.current) clearTimeout(startTimeoutRef.current);
+      if (durationTimeoutRef.current) clearTimeout(durationTimeoutRef.current);
+      if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+    };
+  }, [videoStarted]);
+
   return (
-    <section id="home" className="relative min-h-screen w-full overflow-hidden bg-black">
-      <HlsVideo
-        src={HERO_STREAM}
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
+    <section id="home" className="relative min-h-screen w-full overflow-hidden bg-black flex flex-col justify-between">
+      {!videoFinished && (
+        <video
+          src="/videos/spark-scale-hero.mp4"
+          autoPlay
+          muted
+          playsInline
+          onPlay={handlePlay}
+          onEnded={handleEnd}
+          onError={handleError}
+          onLoadedMetadata={handleLoadedMetadata}
+          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${
+            videoEnded ? "opacity-0" : "opacity-100"
+          }`}
+        />
+      )}
+
+      {/* Subtle atmospheric effects */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/20 to-black pointer-events-none" />
       <div className="absolute inset-0 z-[1] aurora opacity-50 pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col min-h-screen">
-        <div className="flex-1 flex flex-col items-center justify-center text-center px-5 sm:px-6 pt-28 md:pt-32 pb-16">
+      {videoEnded ? (
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 sm:px-6 pt-28 md:pt-32 pb-16">
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
@@ -77,7 +148,7 @@ export function Hero() {
             </a>
           </motion.div>
 
-          {/* Single thin marquee-style tagline strip instead of two glossy cards */}
+          {/* Single thin marquee-style tagline strip */}
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.7, ease: "easeOut", delay: 1.15 }}
@@ -89,10 +160,15 @@ export function Hero() {
             <span>Measured in ROAS, not impressions.</span>
           </motion.div>
         </div>
-      </div>
-      <div className="relative z-10">
-        <LogoMarquee />
-      </div>
+      ) : (
+        <div className="flex-1" />
+      )}
+
+      {videoEnded && (
+        <div className="relative z-10">
+          <LogoMarquee />
+        </div>
+      )}
     </section>
   );
 }
