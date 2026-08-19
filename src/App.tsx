@@ -14,6 +14,16 @@ const Process = lazy(() =>
 const Results = lazy(() =>
   import("@/components/sections/Results").then((m) => ({ default: m.Results }))
 );
+const SocialMediaApproach = lazy(() =>
+  import("@/components/sections/SocialMediaApproach").then((m) => ({
+    default: m.SocialMediaApproach,
+  }))
+);
+const BranchNetwork = lazy(() =>
+  import("@/components/sections/BranchNetwork").then((m) => ({
+    default: m.BranchNetwork,
+  }))
+);
 const WhySparkScale = lazy(() =>
   import("@/components/sections/WhySparkScale").then((m) => ({ default: m.WhySparkScale }))
 );
@@ -25,6 +35,16 @@ const FinalCTA = lazy(() =>
 );
 
 const Skeleton = () => <div className="h-[60vh]" />;
+
+/** Purple light trail that connects the How-we-work and Where-we-execute sections */
+function LightTrailConnector() {
+  return (
+    <div aria-hidden className="relative h-36 md:h-44 flex flex-col items-center">
+      <div className="w-px flex-1 bg-gradient-to-b from-transparent via-[var(--violet)]/50 to-[var(--violet)]" />
+      <span className="relative -mt-px h-2 w-2 rounded-full bg-[var(--violet)] violet-glow animate-pulse-glow" />
+    </div>
+  );
+}
 
 export default function App() {
   return (
@@ -41,6 +61,13 @@ export default function App() {
       </Suspense>
       <Suspense fallback={<Skeleton />}>
         <Results />
+      </Suspense>
+      <Suspense fallback={<Skeleton />}>
+        <SocialMediaApproach />
+      </Suspense>
+      <LightTrailConnector />
+      <Suspense fallback={<Skeleton />}>
+        <BranchNetwork />
       </Suspense>
       <Suspense fallback={<Skeleton />}>
         <WhySparkScale />

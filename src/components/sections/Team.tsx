@@ -35,7 +35,7 @@ const TEAM = [
 
 export function Team() {
   return (
-    <section id="team" className="relative py-32 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section id="team" className="relative py-24 md:py-32 px-5 md:px-12 lg:px-20 overflow-hidden">
       <div className="absolute inset-0 aurora opacity-30" />
       <div className="relative max-w-6xl mx-auto">
         <motion.p
@@ -51,7 +51,7 @@ export function Team() {
           whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-heading italic text-white text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-[-3px] max-w-4xl"
+          className="font-heading italic text-white text-fluid-h1 leading-[0.9] tracking-[-3px] max-w-4xl"
         >
           Lean operators.
           <br />
@@ -68,7 +68,7 @@ export function Team() {
           managers playing telephone with strategy.
         </motion.p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mt-12 md:mt-16">
           {TEAM.map((m, i) => (
             <motion.div
               key={m.name}
@@ -76,7 +76,7 @@ export function Team() {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="liquid-glass rounded-[1.5rem] p-7 flex flex-col gap-5"
+              className="liquid-glass rounded-[1.5rem] p-6 md:p-7 flex flex-col gap-5"
             >
               <div className="flex items-center gap-4">
                 <div className="liquid-glass-strong h-14 w-14 rounded-full flex items-center justify-center violet-glow">

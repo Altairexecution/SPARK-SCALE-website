@@ -3,7 +3,10 @@ import { WHATSAPP_URL, INSTAGRAM_URL } from "@/lib/constants";
 
 export function WhatsAppFab() {
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+    <div
+      className="fixed bottom-4 right-4 z-50 flex flex-col gap-3"
+      style={{ marginBottom: "env(safe-area-inset-bottom)" }}
+    >
       <a
         href={INSTAGRAM_URL}
         target="_blank"

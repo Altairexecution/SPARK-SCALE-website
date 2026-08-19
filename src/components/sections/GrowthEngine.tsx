@@ -67,7 +67,7 @@ export function GrowthEngine() {
       />
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black via-black/60 to-black pointer-events-none" />
 
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 pt-24 pb-24 flex flex-col">
+      <div className="relative z-10 px-5 md:px-12 lg:px-20 pt-20 md:pt-24 pb-24 flex flex-col">
         <div>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -82,7 +82,7 @@ export function GrowthEngine() {
             whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-heading italic text-white text-5xl md:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-3px]"
+            className="font-heading italic text-white text-fluid-h1 leading-[0.9] tracking-[-3px]"
           >
             One engine.
             <br />
@@ -100,7 +100,7 @@ export function GrowthEngine() {
           </motion.p>
         </div>
 
-        <div id="capabilities" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-16">
+        <div id="capabilities" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mt-12 md:mt-16">
           {MODULES.map((m, i) => {
             const Icon = m.icon;
             return (
@@ -110,10 +110,10 @@ export function GrowthEngine() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-                className="liquid-glass rounded-[1.25rem] p-6 min-h-[320px] flex flex-col"
+                className="liquid-glass rounded-[1.25rem] p-5 sm:p-6 min-h-[280px] sm:min-h-[300px] md:min-h-[320px] flex flex-col"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="liquid-glass rounded-[0.75rem] h-11 w-11 flex items-center justify-center">
+                  <div className="liquid-glass rounded-[0.75rem] h-11 w-11 flex items-center justify-center shrink-0">
                     <Icon className="h-5 w-5 text-white" strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-wrap justify-end gap-1.5 max-w-[70%]">
@@ -129,7 +129,7 @@ export function GrowthEngine() {
                 </div>
                 <div className="flex-1" />
                 <div className="mt-6">
-                  <h3 className="font-heading italic text-white text-3xl md:text-[2rem] tracking-[-1px] leading-none">
+                  <h3 className="font-heading italic text-white text-2xl sm:text-3xl md:text-[2rem] tracking-[-1px] leading-none">
                     {m.title}
                   </h3>
                   <p className="mt-3 text-sm text-white/85 font-body font-light leading-snug max-w-[36ch]">

@@ -100,6 +100,10 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
+  /* Anchor targets clear the fixed header */
+  [id] {
+    scroll-margin-top: 6.5rem;
+  }
   ::selection {
     background: color-mix(in oklab, var(--violet) 50%, transparent);
     color: white;
@@ -115,6 +119,25 @@
   }
   .font-body {
     font-family: var(--font-body);
+  }
+
+  /* Fluid display type — scales continuously from 320px to desktop */
+  .text-fluid-display {
+    font-size: clamp(3rem, 13vw, 8rem);
+  }
+  .text-fluid-h1 {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+  }
+  .text-fluid-h2 {
+    font-size: clamp(2rem, 6vw, 4.5rem);
+  }
+
+  /* Bottom safe-area offset for fixed elements on iOS */
+  .pb-safe {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+  .mb-safe {
+    margin-bottom: max(0px, env(safe-area-inset-bottom));
   }
 
   /* Liquid Glass */
@@ -253,4 +276,16 @@
   to { transform: translateX(-50%); }
 }
 .animate-marquee { animation: marquee 30s linear infinite; }
+
+/* Respect reduced motion: content stays complete, motion is disabled */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
