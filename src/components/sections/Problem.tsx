@@ -25,7 +25,7 @@ const PROBLEMS = [
 
 export function Problem() {
   return (
-    <section className="relative py-32 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section className="relative py-24 md:py-32 px-5 md:px-12 lg:px-20 overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-60" />
       <div className="absolute inset-0 aurora opacity-40" />
 
@@ -44,7 +44,7 @@ export function Problem() {
           whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-heading italic text-white text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-[-3px] max-w-4xl"
+          className="font-heading italic text-white text-fluid-h1 leading-[0.9] tracking-[-3px] max-w-4xl"
         >
           Marketing is loud.
           <br />
@@ -62,7 +62,7 @@ export function Problem() {
           disconnected ads, no follow-up, no data, no compounding. We engineer the system.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-14 md:mt-20">
           {PROBLEMS.map((p, i) => (
             <motion.div
               key={p.n}
@@ -70,13 +70,13 @@ export function Problem() {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: "easeOut" }}
-              className="liquid-glass rounded-[1.5rem] p-7 group"
+              className="liquid-glass rounded-[1.5rem] p-6 md:p-7 group"
             >
               <div className="flex items-start justify-between mb-6">
-                <span className="font-heading italic text-white/40 text-3xl">{p.n}</span>
+                <span className="font-heading italic text-white/40 text-2xl md:text-3xl">{p.n}</span>
                 <div className="h-2 w-2 rounded-full bg-[var(--violet)] animate-pulse-glow" />
               </div>
-              <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none">
+              <h3 className="font-heading italic text-white text-2xl md:text-4xl tracking-[-1px] leading-none">
                 {p.title}
               </h3>
               <p className="mt-4 text-sm text-white/80 font-body font-light leading-snug max-w-[40ch]">

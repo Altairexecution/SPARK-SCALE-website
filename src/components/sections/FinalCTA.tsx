@@ -16,7 +16,7 @@ export function FinalCTA() {
   return (
     <section
       id="contact"
-      className="relative py-32 px-6 md:px-12 lg:px-20 overflow-hidden"
+      className="relative py-24 md:py-32 px-5 md:px-12 lg:px-20 overflow-hidden"
     >
       <div className="absolute inset-0 aurora opacity-60" />
       <div className="absolute inset-0 grid-bg opacity-30" />
@@ -37,7 +37,7 @@ export function FinalCTA() {
             whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9 }}
-            className="mt-8 font-heading font-extrabold text-white text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-[-3px]"
+            className="mt-8 font-heading font-extrabold text-white text-fluid-h1 leading-[0.9] tracking-[-3px]"
           >
             Book your free
             <br />
@@ -62,7 +62,7 @@ export function FinalCTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9 }}
-            className="relative h-[460px] md:h-[560px] rounded-[2rem] overflow-hidden liquid-glass"
+            className="relative h-[420px] sm:h-[460px] md:h-[560px] rounded-[2rem] overflow-hidden liquid-glass"
           >
             <Suspense
               fallback={
@@ -93,14 +93,14 @@ export function FinalCTA() {
         </div>
       </div>
 
-      <footer className="relative mt-32 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50 font-body">
-        <div className="flex items-center gap-3">
+      <footer className="relative mt-24 md:mt-32 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-white/50 font-body">
+        <div className="flex items-center gap-3 text-center md:text-left">
           <img src={logo} alt="" className="h-7 w-7 object-contain" />
           <span>
             © {new Date().getFullYear()} Spark Scale. Growth infrastructure for ambitious businesses.
           </span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           <a href="#engine" className="hover:text-white">Growth Engine</a>
           <a href="#results" className="hover:text-white">Results</a>
           <a href="#team" className="hover:text-white">Team</a>

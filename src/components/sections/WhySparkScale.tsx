@@ -26,7 +26,7 @@ const PILLARS = [
 
 export function WhySparkScale() {
   return (
-    <section className="relative py-32 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section className="relative py-24 md:py-32 px-5 md:px-12 lg:px-20 overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-50" />
       <div className="relative max-w-6xl mx-auto">
         <motion.p
@@ -42,14 +42,14 @@ export function WhySparkScale() {
           whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-heading italic text-white text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-[-3px] max-w-4xl"
+          className="font-heading italic text-white text-fluid-h1 leading-[0.9] tracking-[-3px] max-w-4xl"
         >
           Not an agency.
           <br />
           <span className="text-white/40">A growth infrastructure.</span>
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-12 md:mt-16">
           {PILLARS.map((p, i) => {
             const Icon = p.icon;
             return (
@@ -59,13 +59,13 @@ export function WhySparkScale() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="liquid-glass rounded-[1.5rem] p-7 flex gap-5 items-start"
+                className="liquid-glass rounded-[1.5rem] p-6 md:p-7 flex gap-4 md:gap-5 items-start"
               >
-                <div className="liquid-glass h-12 w-12 rounded-xl flex items-center justify-center shrink-0">
+                <div className="liquid-glass h-11 w-11 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0">
                   <Icon className="h-5 w-5 text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="font-heading italic text-white text-2xl md:text-3xl tracking-[-1px] leading-tight">
+                  <h3 className="font-heading italic text-white text-xl sm:text-2xl md:text-3xl tracking-[-1px] leading-tight">
                     {p.title}
                   </h3>
                   <p className="mt-3 text-sm text-white/80 font-body font-light leading-snug">

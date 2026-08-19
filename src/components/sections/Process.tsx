@@ -12,7 +12,7 @@ const STEPS = [
 
 export function Process() {
   return (
-    <section className="relative py-32 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section className="relative py-24 md:py-32 px-5 md:px-12 lg:px-20 overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-50" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -29,17 +29,17 @@ export function Process() {
           whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-heading italic text-white text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-[-3px] max-w-4xl"
+          className="font-heading italic text-white text-fluid-h1 leading-[0.9] tracking-[-3px] max-w-4xl"
         >
           From audit to scale —<br />
           <span className="text-white/40">in 90 days.</span>
         </motion.h2>
 
-        <div className="relative mt-20">
+        <div className="relative mt-16 md:mt-20">
           {/* vertical spine */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--violet)]/40 to-transparent" />
+          <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--violet)]/40 to-transparent" />
 
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-8 md:gap-10">
             {STEPS.map((s, i) => (
               <motion.div
                 key={s.n}
@@ -52,12 +52,12 @@ export function Process() {
                 }`}
               >
                 {/* dot */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-[var(--violet)] violet-glow" />
+                <div className="absolute left-5 md:left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-[var(--violet)] violet-glow" />
 
-                <div className="ml-16 md:ml-0 md:w-1/2 md:px-10">
-                  <div className="liquid-glass rounded-[1.25rem] p-6">
-                    <span className="font-heading italic text-white/40 text-2xl">{s.n}</span>
-                    <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none mt-2">
+                <div className="ml-14 md:ml-0 md:w-1/2 md:px-10">
+                  <div className="liquid-glass rounded-[1.25rem] p-5 md:p-6">
+                    <span className="font-heading italic text-white/40 text-xl md:text-2xl">{s.n}</span>
+                    <h3 className="font-heading italic text-white text-2xl md:text-4xl tracking-[-1px] leading-none mt-2">
                       {s.title}
                     </h3>
                     <p className="mt-3 text-sm text-white/80 font-body font-light leading-snug">

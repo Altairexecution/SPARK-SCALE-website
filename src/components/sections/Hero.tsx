@@ -24,16 +24,16 @@ export function Hero() {
       <div className="absolute inset-0 z-[1] aurora opacity-50 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col min-h-screen">
-        <div className="flex-1 flex flex-col items-center justify-center text-center px-4 pt-32 pb-16">
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-5 sm:px-6 pt-28 md:pt-32 pb-16">
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
-            className="liquid-glass rounded-full inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 mb-8"
+            className="liquid-glass rounded-full inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 mb-8 max-w-full"
           >
-            <span className="bg-white text-black rounded-full px-3 py-1 text-xs font-semibold">
+            <span className="bg-white text-black rounded-full px-3 py-1 text-xs font-semibold shrink-0">
               2026
             </span>
-            <span className="text-sm text-white/90 font-body">
+            <span className="text-xs sm:text-sm text-white/90 font-body">
               Growth infrastructure — for every kind of business
             </span>
           </motion.div>
@@ -41,7 +41,7 @@ export function Hero() {
           <BlurText
             text="Ready to Scale?"
             delay={0.4}
-            className="text-6xl md:text-8xl lg:text-[8rem] font-heading text-white leading-[0.85] max-w-5xl tracking-[-4px] font-black"
+            className="text-fluid-display font-heading text-white leading-[0.85] max-w-5xl tracking-[-4px] font-black"
           />
 
           <motion.p
@@ -57,20 +57,20 @@ export function Hero() {
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.95 }}
-            className="flex flex-wrap items-center justify-center gap-4 mt-8"
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8 w-full sm:w-auto"
           >
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="liquid-glass-strong rounded-full px-5 py-3 text-sm font-medium text-white inline-flex items-center gap-2 violet-glow"
+              className="liquid-glass-strong rounded-full px-5 py-3.5 text-sm font-medium text-white inline-flex items-center justify-center gap-2 violet-glow min-h-[48px]"
             >
               Start scaling on WhatsApp
               <ArrowUpRight className="h-5 w-5" />
             </a>
             <a
               href="#engine"
-              className="inline-flex items-center gap-2 text-white text-sm font-medium px-2 py-3"
+              className="inline-flex items-center justify-center gap-2 text-white text-sm font-medium px-2 py-3 min-h-[48px]"
             >
               See the engine
               <Play className="h-4 w-4 fill-current" />
@@ -81,11 +81,11 @@ export function Hero() {
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.7, ease: "easeOut", delay: 1.15 }}
-            className="mt-12 liquid-glass rounded-full px-5 py-2.5 inline-flex items-center gap-3 text-xs md:text-sm text-white/85 font-body"
+            className="mt-12 liquid-glass rounded-full px-5 py-2.5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs md:text-sm text-white/85 font-body"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--violet)] animate-pulse-glow" />
             <span>Built for compounding revenue.</span>
-            <span className="opacity-30">/</span>
+            <span className="opacity-30 hidden sm:inline">/</span>
             <span>Measured in ROAS, not impressions.</span>
           </motion.div>
         </div>

@@ -90,7 +90,7 @@ function Sparkline({ data, invert = false }: { data: number[]; invert?: boolean 
 
 export function Results() {
   return (
-    <section id="results" className="relative py-32 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section id="results" className="relative py-24 md:py-32 px-5 md:px-12 lg:px-20 overflow-hidden">
       <div className="absolute inset-0 aurora opacity-40" />
       <div className="relative max-w-5xl mx-auto">
         <motion.p
@@ -132,7 +132,7 @@ export function Results() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
-                className="grid grid-cols-12 gap-4 items-center px-5 md:px-7 py-5 hover:bg-white/[0.02] transition-colors"
+                className="grid grid-cols-12 gap-x-3 gap-y-4 md:gap-4 items-center px-4 sm:px-7 py-5 hover:bg-white/[0.02] transition-colors"
               >
                 <div className="col-span-12 md:col-span-1 flex md:block">
                   <div className="liquid-glass h-9 w-9 rounded-lg flex items-center justify-center">
@@ -154,7 +154,7 @@ export function Results() {
                   <Sparkline data={c.spark} invert={isNegative} />
                 </div>
                 <div className="col-span-5 md:col-span-3 text-right">
-                  <div className="font-heading text-white text-2xl md:text-3xl tracking-[-1px] leading-none font-bold text-violet-glow">
+                  <div className="font-heading text-white text-xl sm:text-2xl md:text-3xl tracking-[-1px] leading-none font-bold text-violet-glow">
                     {c.metric}
                   </div>
                   <div className="mt-1 text-[10px] text-white/55 font-body uppercase tracking-wider">
