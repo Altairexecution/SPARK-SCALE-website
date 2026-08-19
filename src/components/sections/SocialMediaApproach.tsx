@@ -13,12 +13,8 @@ import {
 
 /**
  * Spark Scale — Social Media Marketing Approach.
- * A cinematic, scroll-driven sequence: a sticky production frame that
- * crossfades while the 7-phase story scrolls beside (and beneath) it.
- *
- * Every phase supports an optional local image (e.g. /images/approach/xxx.jpg).
- * Until a high-quality production still is dropped into the project, a
- * designed cinematic placeholder frame is rendered in its place.
+ * Pair text with individual images in an alternating pattern on desktop,
+ * and stacked vertically on mobile.
  */
 
 type Phase = {
@@ -88,6 +84,16 @@ const PHASES: Phase[] = [
     image: "/images/approach/approach_growth.jpg",
   },
 ];
+
+const textVariants = {
+  active: { opacity: 1, scale: 1, filter: "blur(0px)", y: 0 },
+  inactive: { opacity: 0.35, scale: 0.98, filter: "blur(2px)", y: 10 },
+};
+
+const imageVariants = {
+  active: { opacity: 1, scale: 1, filter: "blur(0px)", y: 0 },
+  inactive: { opacity: 0.3, scale: 0.96, filter: "blur(4px)", y: 15 },
+};
 
 function FrameArt({ phase, active }: { phase: Phase; active: boolean }) {
   const Icon = phase.icon;
@@ -166,7 +172,7 @@ function VisualFrame({
         </AnimatePresence>
       )}
 
-      {/* image slot — drop production stills into /public/images/approach/ */}
+      {/* image slot */}
       {phase.image && (
         <img
           src={phase.image}
@@ -225,13 +231,11 @@ export function SocialMediaApproach() {
           }
         }
       },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+      { rootMargin: "-35% 0px -35% 0px", threshold: 0 },
     );
     blocks.forEach((b) => io.observe(b));
     return () => io.disconnect();
   }, []);
-
-  const activePhase = PHASES[active];
 
   return (
     <section
@@ -274,72 +278,71 @@ export function SocialMediaApproach() {
           we grow.
         </motion.p>
 
-        {/* mobile sticky frame */}
-        <div className="lg:hidden sticky top-[5.5rem] z-20 -mx-5 px-5 pt-10">
-          <div className="relative h-[40vh] min-h-[300px] max-w-[400px] mx-auto">
-            <VisualFrame
-              phase={activePhase}
-              index={active}
-              total={PHASES.length}
-              active
-              reduce={reduce}
-            />
-          </div>
-        </div>
-
-        {/* desktop frame + phases */}
-        <div className="mt-12 lg:mt-20 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16 lg:items-start">
-          {/* sticky frame column (desktop) */}
-          <div className="hidden lg:block">
-            <div className="lg:sticky lg:top-28">
-              <div className="relative h-[64vh] max-h-[640px]">
-                <VisualFrame
-                  phase={activePhase}
-                  index={active}
-                  total={PHASES.length}
-                  active
-                  reduce={reduce}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* phases */}
-          <ol ref={listRef} className="flex flex-col lg:py-8">
-            {PHASES.map((p, i) => {
-              const isActive = i === active;
-              return (
-                <li
-                  key={p.n}
-                  data-phase={i}
-                  className={`scroll-mt-40 py-14 lg:py-0 lg:h-[64vh] lg:flex lg:flex-col lg:justify-center border-t border-white/5 first:border-t-0 lg:border-t-0 ${
-                    isActive ? "" : "opacity-45 lg:opacity-35"
-                  } transition-opacity duration-500`}
+        {/* phases - responsive stack on mobile, alternating row grid on desktop */}
+        <ol ref={listRef} className="mt-16 lg:mt-24 flex flex-col gap-20 lg:gap-32">
+          {PHASES.map((p, i) => {
+            const isActive = i === active;
+            return (
+              <li
+                key={p.n}
+                data-phase={i}
+                className="scroll-mt-28 w-full"
+              >
+                <div
+                  className={`flex flex-col lg:flex-row gap-8 lg:gap-16 items-center ${
+                    i % 2 !== 0 ? "lg:flex-row-reverse" : ""
+                  }`}
                 >
-                  <div className="flex items-center gap-5">
-                    <span
-                      className={`font-heading italic text-3xl md:text-4xl tracking-[-1px] ${
-                        isActive ? "text-[var(--violet-glow)]" : "text-white/35"
-                      } transition-colors duration-500`}
-                    >
-                      {p.n}
-                    </span>
-                    <span className="h-px flex-1 bg-gradient-to-r from-white/15 to-transparent" />
-                    <span className="text-[10px] uppercase tracking-[0.22em] text-white/45 font-body">
-                      Phase {p.n}
-                    </span>
-                  </div>
-                  <h3 className="mt-6 font-heading italic text-white text-4xl sm:text-5xl md:text-6xl tracking-[-2px] leading-none">
-                    {p.title}
-                  </h3>
-                  <p className="mt-5 max-w-[46ch] text-white/80 font-body font-light leading-relaxed text-sm md:text-base">
-                    {p.body}
-                  </p>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
+                  {/* Text Column */}
+                  <motion.div
+                    variants={textVariants}
+                    animate={isActive ? "active" : "inactive"}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="flex-1 w-full flex flex-col justify-center"
+                  >
+                    <div className="flex items-center gap-5">
+                      <span
+                        className={`font-heading italic text-3xl md:text-4xl tracking-[-1px] ${
+                          isActive ? "text-[var(--violet-glow)]" : "text-white/35"
+                        } transition-colors duration-500`}
+                      >
+                        {p.n}
+                      </span>
+                      <span className="h-px flex-1 bg-gradient-to-r from-white/15 to-transparent" />
+                      <span className="text-[10px] uppercase tracking-[0.22em] text-white/45 font-body">
+                        Phase {p.n}
+                      </span>
+                    </div>
+                    <h3 className="mt-6 font-heading italic text-white text-4xl sm:text-5xl md:text-6xl tracking-[-2px] leading-none">
+                      {p.title}
+                    </h3>
+                    <p className="mt-5 max-w-[46ch] text-white/80 font-body font-light leading-relaxed text-sm md:text-base">
+                      {p.body}
+                    </p>
+                  </motion.div>
+
+                  {/* Image Column */}
+                  <motion.div
+                    variants={imageVariants}
+                    animate={isActive ? "active" : "inactive"}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="flex-1 w-full max-w-[500px] lg:max-w-none"
+                  >
+                    <div className="relative aspect-[4/3] md:aspect-[16/10] w-full">
+                      <VisualFrame
+                        phase={p}
+                        index={i}
+                        total={PHASES.length}
+                        active={isActive}
+                        reduce={reduce}
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );
